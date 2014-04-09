@@ -201,9 +201,9 @@ public class JavaModelGenerator {
             this.tempModel.put(fullQualifiedType, metaData);
 
         } catch (ParseException e) {
-            throw new RuntimeException(e);
+            error(file, e);
         } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            error(file, e);
         } finally {
             try {
                 if (in != null) {
@@ -215,6 +215,7 @@ public class JavaModelGenerator {
         }
     }
 
-    ;
-
+    private void error(File file, Exception e) {
+        throw new RuntimeException("could not process file + " + file, e);
+    }
 }
